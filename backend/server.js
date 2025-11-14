@@ -4,25 +4,12 @@ import app from './app.js';
 import { Server } from 'socket.io';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
-//import Redis from 'ioredis';
 import projectModel from './models/project.model.js';
 import { generateResult } from './services/ai.service.js';
 
-// Load environment variables
 const port = process.env.PORT || 5000;
 const mongoURI = process.env.MONGO_URI;
 const jwtSecret = process.env.JWT_SECRET;
-
-// Connect to MongoDB
-
-
-// Optional Redis setup
-// let redis;
-//  try {
-//    redis = new Redis();
-// } catch (err) {
-//    console.warn("⚠️ Redis connection failed:", err.message);
-//  }
 
 // Create HTTP server
 const server = http.createServer(app);
@@ -42,8 +29,6 @@ io.use(async (socket, next) => {
       (socket.handshake.headers.authorization
         ? socket.handshake.headers.authorization.split(' ')[1]
         : undefined);
-
-    // ...rest of your middleware code...
 
     const projectId = socket.handshake.query.projectId;
 
